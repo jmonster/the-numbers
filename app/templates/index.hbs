@@ -1,17 +1,16 @@
-<table>
+<table class="hover">
   <caption>Women in Software Engineering Stats</caption>
   <thead>
     <tr>
-      <th><label for="e1">company</label></th>
-      <th><label for="e2">team</label></th>
-      <th><label for="e3">num_female_eng</label></th>
-      <th><label for="e4">num_eng</label></th>
-      <th><label for="e5">percent_female_eng</label></th>
-      <th><label for="e6">last_updated</label></th>
+      <th>Company</th>
+      <th>Team</th>
+      <th>Females</th>
+      <th>Total</th>
+      <th>Ratio</th>
+      <th>Last updated</th>
     </tr>
   </thead>
   <tbody>
-
     {{#each sortedData as |entity|}}
     <tr>
       <td>{{entity.company}}</td>
