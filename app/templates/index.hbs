@@ -1,1 +1,26 @@
-<pre>{{theData.foo}}</pre>
+<table>
+  <caption>Women in Software Engineering Stats</caption>
+  <thead>
+    <tr>
+      <th><label for="e1">company</label></th>
+      <th><label for="e2">team</label></th>
+      <th><label for="e3">num_female_eng</label></th>
+      <th><label for="e4">num_eng</label></th>
+      <th><label for="e5">percent_female_eng</label></th>
+      <th><label for="e6">last_updated</label></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each sortedData as |entity|}}
+    <tr>
+      <td>{{entity.company}}</td>
+      <td>{{entity.team}}</td>
+      <td>{{entity.num_female_eng}}</td>
+      <td>{{entity.num_eng}}</td>
+      <td>{{entity.percent_female_eng}}</td>
+      <td>{{entity.last_updated}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

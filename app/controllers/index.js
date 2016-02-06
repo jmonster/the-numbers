@@ -1,8 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  dataUrl: 'https://raw.githubusercontent.com/triketora/women-in-software-eng/master/data.txt',
+
   fetchLatestData: function () {
-    return Ember.$.get('https://raw.githubusercontent.com/triketora/women-in-software-eng/master/data.txt');
+    return Ember.$.get(this.get('dataUrl'));
   },
 
   convertToObject: function (rawData) {
@@ -18,9 +20,9 @@ export default Ember.Controller.extend({
       return group.match(/\s*(.+):\s+(.+)\n/mg);
     }).splice(1);
 
-    let result = {};
+    // let result = {};
 
-    groups.forEach((attributes) => {
+    return groups.map((attributes) => {
       let entry = {};
 
       attributes.forEach((attr) => {
@@ -31,25 +33,31 @@ export default Ember.Controller.extend({
         entry[parts[0].trim()] = parts[1].trim();
       });
 
-      // store attributes in object under company name as key
-      result[entry.company] = entry;
-      delete entry.company;
+      return entry;
     });
 
-    return result;
+    // return result;
   },
 
-  theData: Ember.computed(function() {
-    let data = Ember.Object.create();
-
+  updateTheData: Ember.on('init', function() {
     // asynchronously update the data set
     this
       .fetchLatestData()
       .then(this.convertToObject)
-      .then((jsonified) => {
-        data.set('foo', JSON.stringify(jsonified));
-      });
+      .then((arr) => {
+        arr.forEach((obj) => {
+          obj.percent_female_eng = (100 * obj.num_female_eng / obj.num_eng).toFixed(2);
+        });
 
-    return data;
+        return arr;
+      })
+      .then((jsonified) => { this.set('unsortedData', jsonified); });
+
+  }),
+
+  dataSorting: ['company'],
+  sortedData: Ember.computed.sort('unsortedData', 'dataSorting'),
+  stringifiedSortedData: Ember.computed('sortedData', function (){
+    return JSON.stringify(this.get('sortedData'));
   })
 });
