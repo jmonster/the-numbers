@@ -1,7 +1,7 @@
 {
-  "name": "triketora",
+  "name": "the-numbers",
   "version": "0.0.0",
-  "description": "Small description for triketora goes here",
+  "description": "Small description for the-numbers goes here",
   "private": true,
   "directories": {
     "doc": "doc",

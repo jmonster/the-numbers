@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'triketora',
+    modulePrefix: 'the-numbers',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
